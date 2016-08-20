@@ -51,11 +51,7 @@ namespace Basket.Web
             {
                 UseEmbeddedHttpServer = true,
                 DefaultDatabase = "baskets",
-                RunInMemory = true,
-                Configuration =
-                {
-                    Port = 8082
-                }
+                RunInMemory = true
             };
 
             store.Configuration.Storage.Voron.AllowOn32Bits = true;
