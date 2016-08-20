@@ -49,7 +49,7 @@ namespace Basket.Web
             NonAdminHttp.EnsureCanListenToWhenInNonAdminContext(8082);
             var store = new EmbeddableDocumentStore
             {
-                UseEmbeddedHttpServer = true,
+                UseEmbeddedHttpServer = false,
                 DefaultDatabase = "baskets",
                 RunInMemory = true
             };
