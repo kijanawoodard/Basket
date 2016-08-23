@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Basket.Web.Models;
 using Raven.Client;
 using Raven.Client.Document;
 using Raven.Client.Embedded;
@@ -68,6 +69,7 @@ namespace Basket.Web
             container.Register<IDocumentSession>(() => store.OpenSession(), new WebRequestLifestyle());
 
             ExecuteIndexes(store);
+            LoadData(store);
         }
 
         private string FindTypeTagName(Type type)
@@ -81,5 +83,78 @@ namespace Basket.Web
         {
             IndexCreation.CreateIndexes(Assembly.GetExecutingAssembly(), store);
         }
+
+        private void LoadData(IDocumentStore store)
+        {
+            using (var session = store.OpenSession())
+            {
+                var catalog = new ProductCatalog {Id = "catalogs/fall"};
+                catalog.Products = _products.ToArray();
+
+                session.Store(catalog);
+                session.SaveChanges();
+            }
+        }
+
+        private IEnumerable<Product> _products = new[]
+        {
+            new Product
+            {
+                ProductId = "183313",
+                Categories = new [] {"Baskets & Accessories"},
+                Description = "Team U.S.A. Basket & Protector Set",
+                LongDescription = "CELEBRATE AMERICA! Show your American pride with our Team USA Basket and Protector Set. Available for a limited time to coincide with the summer games, this beautiful basket features Bold Red, White, Navy Blue and Warm Brown – the Team U.S.A Basket is a true winner! Made in the U.S.A. Includes Basket (10 3/4\"l x 7 3/4\"w x 5 1/4\"h; Rec. Wt. Use: 10 lbs.) and Protector.",
+                ImageUrl = "http://us.longaberger.com/images/items/63606.jpg",
+                Skus = new []
+                {
+                    new Sku
+                    {
+                        Code = "183313",
+                        Description = "Team U.S.A. Basket & Protector Set",
+                        Price = 75.00m,
+                        ImageUrl = "http://us.longaberger.com/images/items/63606.jpg",
+                        Available = true
+                    } 
+                }
+            },
+            new Product
+            {
+                ProductId = "2346",
+                Categories = new [] {"Baskets & Accessories", "Spring & Summer 2016 WishList"},
+                Description = "Cake Basket with Small Riser",
+                LongDescription = @"J.W. Longaberger crafted the Cake Basket for his wife, Bonnie, and for the ladies of Dresden, Ohio, to carry their homemade pies to church socials and picnics. Two Woven Traditions® Grandma Bonnie's™ Pie Plates fit easily inside with the Small Riser. Be sure to add a Protector keep your basket safe from spills. Carries our Woven Traditions 8"" x 8"" Baking Dish, Grandma Bonnie's™ Pie Plate, 8-in-1 Large Bowl and many more. Protector and WoodCrafts Lid sold separately. Made in the U.S.A. 12""l x 12""w x 6""h Rec. Wt. Use: 30 lbs.
+
+The Cake Protector is available to order with an extended delivery of July.",
+                ImageUrl = "http://us.longaberger.com/images/items/17300BSKT.jpg",
+                Skus = new []
+                {
+                    new Sku
+                    {
+                        Code = "1730090",
+                        Description = "Pewter",
+                        Price = 87.00m,
+                        ImageUrl = "http://us.longaberger.com/images/items/1730090.jpg",
+                        Available = true
+                    },
+                    new Sku
+                    {
+                        Code = "1730015",
+                        Description = "Vintage",
+                        Price = 87.00m,
+                        ImageUrl = "http://us.longaberger.com/images/items/1730015.jpg",
+                        Available = true
+                    },
+                    new Sku
+                    {
+                        Code = "1730039",
+                        Description = "Warm Brown",
+                        Price = 87.00m,
+                        ImageUrl = "http://us.longaberger.com/images/items/1730039.jpg",
+                        Available = true
+                    }
+                }
+            }
+
+        };
     }
 }
