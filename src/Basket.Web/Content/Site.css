@@ -22,3 +22,9 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.catalog { display: flex;margin-top: 2em;}
+.catalog > * { margin-right: 30px; }
+.catalog #products { display: flex; }
+.catalog .product { margin-right: 2em; text-align: center}
+.catalog .product .price { font-weight: bold; }
