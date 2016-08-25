@@ -1,0 +1,30 @@
+﻿@model Basket.Web.Controllers.ProductController.ViewModel
+
+@{
+    ViewBag.Title = "Basket Products";
+}
+
+<header class="catalog">
+    <img src="http://www.longaberger.com/images/logo.png" width="224" height="62">
+</header>
+<main class="catalog">
+    <section id="categories">
+        @foreach (var category in Model.Categories)
+        {
+            <a href="@Url.Action("Get", "Product", new {category})">@category</a>
+        }
+    </section>
+    <section id="products">
+        <h2>@Model.Category</h2>
+        <section class="items">
+            @foreach (var product in Model.Products)
+            {
+                <div class="product">
+                    <img src="@product.ImageUrl" alt="@product.Description" width="150" height="150" />
+                    <div class="description">@product.Description</div>
+                    <div class="price">@product.Skus.First().Price.ToString("C")</div>
+                </div>
+            }
+        </section>
+    </section>
+</main>

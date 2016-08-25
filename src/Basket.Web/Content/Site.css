@@ -1,6 +1,7 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background-color: #FBF7EB;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -23,8 +24,19 @@ textarea {
     max-width: 280px;
 }
 
-.catalog { display: flex;margin-top: 2em;}
-.catalog > * { margin-right: 30px; }
-.catalog #products { display: flex; }
-.catalog .product { margin-right: 2em; text-align: center}
+header.catalog { margin-top: 1em;}
+.catalog { display: flex;}
+.catalog #categories {
+    text-transform: uppercase;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    padding: 4em 1em;
+    background-color: #F1ECD6;
+    width: 20%;
+}
+.catalog #categories a {color: black;padding-bottom: .5em;}
+.catalog #products { background-color: #fff;padding-left: 2em;flex: 1;}
+.catalog #products .items { display: flex;flex-wrap: wrap;}
+.catalog .product {width: 150px; margin: 0 4em 4em 0; text-align: center}
 .catalog .product .price { font-weight: bold; }

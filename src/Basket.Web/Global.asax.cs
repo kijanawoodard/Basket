@@ -114,7 +114,7 @@ namespace Basket.Web
                 {
                     ProductId = columns[6],
                     Description = columns[9],
-                    Categories = columns[8].Split(','),
+                    Categories = new [] { columns[8] },
                     ImageUrl = $"http://us.longaberger.com/images/items/{columns[10]}",
                     LongDescription = columns[11],
                     Skus = new []

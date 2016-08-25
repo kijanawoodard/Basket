@@ -14,7 +14,7 @@
         @foreach (var product in Model.Products)
         {
             <div class="product">
-                <img src="@product.ImageUrl" alt="@product.Description" width="150" height="150" />
+                <img src="@product.ImageUrl" alt="@product.Description" width="150" height="150"/>
                 <div class="description">@product.Description</div>
                 <div class="price">@product.Skus.First().Price.ToString("C")</div>
             </div>

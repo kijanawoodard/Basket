@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Basket.Web.Models;
 using Raven.Client;
 
 namespace Basket.Web.Controllers
@@ -19,8 +16,7 @@ namespace Basket.Web.Controllers
 
         public ActionResult Index()
         {
-            var catalog = _session.Load<ProductCatalog>("catalogs/fall");
-            return View(catalog);
+            return RedirectToAction("Get", "Product", new { category = "Specials" });
         }
 
         public ActionResult About()
