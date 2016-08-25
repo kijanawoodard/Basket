@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Web;
@@ -86,13 +87,48 @@ namespace Basket.Web
 
         private void LoadData(IDocumentStore store)
         {
+            var filename = @"product_data.txt";
+            var directory = AppDomain.CurrentDomain.GetData("DataDirectory").ToString();
+            var path = Path.Combine(directory, filename);
+            var raw = File.ReadAllText(path);
+            var lines = raw.Split(new[] {"EOL:EOL\r\n"}, StringSplitOptions.RemoveEmptyEntries);
+            var products = ParseProducts(lines);
+
             using (var session = store.OpenSession())
             {
                 var catalog = new ProductCatalog {Id = "catalogs/fall"};
-                catalog.Products = _products.ToArray();
+                catalog.Products = products.ToArray();
 
                 session.Store(catalog);
                 session.SaveChanges();
+            }
+        }
+
+        private IEnumerable<Product> ParseProducts(string[] lines)
+        {
+            foreach (var line in lines)
+            {
+                var columns = line.Split('\t');
+                if (columns[0] != "Customer") continue;
+                yield return new Product
+                {
+                    ProductId = columns[6],
+                    Description = columns[9],
+                    Categories = columns[8].Split(','),
+                    ImageUrl = $"http://us.longaberger.com/images/items/{columns[10]}",
+                    LongDescription = columns[11],
+                    Skus = new []
+                    {
+                        new Sku
+                        {
+                            Available = true,
+                            Code = columns[6],
+                            Description = columns[9],
+                            ImageUrl = $"http://us.longaberger.com/images/items/{columns[10]}",
+                            Price = decimal.Parse(columns[1])
+                        }
+                    }
+                };
             }
         }
 
