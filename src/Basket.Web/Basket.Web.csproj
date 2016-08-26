@@ -200,8 +200,8 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <None Include="Views\ProductsByCategory\Index.cshtml" />
-    <None Include="Views\ProductSearch\Index.cshtml" />
+    <Content Include="Views\ProductsByCategory\Index.cshtml" />
+    <Content Include="Views\ProductSearch\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
