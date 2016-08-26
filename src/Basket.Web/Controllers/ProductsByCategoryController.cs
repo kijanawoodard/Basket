@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
@@ -7,27 +6,20 @@ using Raven.Client;
 
 namespace Basket.Web.Controllers
 {
-    public class ProductController : Controller
+    public class ProductsByCategoryController : Controller
     {
         private readonly IDocumentSession _session;
 
-        public ProductController(IDocumentSession session)
+        public ProductsByCategoryController(IDocumentSession session)
         {
             _session = session;
         }
 
         [HttpGet]
-        public ActionResult Index()
-        {
-            return RedirectToAction(nameof(Get), new {category = "Specials"});
-        }
-
-        [HttpGet]
-        public ActionResult Get(string category)
+        public ActionResult Index(string category = "Specials")
         {
             var catalog = _session.Load<ProductCatalog>("catalogs/fall");
             var products = catalog.Products.Where(x => x.Categories.Contains(category)).ToList();
-            var cake = catalog.Products.Where(x => string.Equals(x.Description, "CALIFORNIA CAKE BASKET", StringComparison.OrdinalIgnoreCase));
             var model = new ViewModel
             {
                 Category = category,

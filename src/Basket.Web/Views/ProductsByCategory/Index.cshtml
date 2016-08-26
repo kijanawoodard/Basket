@@ -1,4 +1,4 @@
-﻿@model Basket.Web.Controllers.ProductController.ViewModel
+﻿@model Basket.Web.Controllers.ProductsByCategoryController.ViewModel
 
 @{
     ViewBag.Title = "Basket Products";
@@ -6,12 +6,16 @@
 
 <header class="catalog">
     <img src="http://www.longaberger.com/images/logo.png" width="224" height="62">
+    <form action="@Url.Action("Index", "ProductSearch")" method="get">
+        <input type="text" name="q" placeholder="Enter Search Text"/>
+        <button type="submit">Search</button>
+    </form>
 </header>
 <main class="catalog">
     <section id="categories">
         @foreach (var category in Model.Categories)
         {
-            <a href="@Url.Action("Get", "Product", new {category})">@category</a>
+            <a href="@Url.Action("Index", "ProductsByCategory", new {category})">@category</a>
         }
     </section>
     <section id="products">

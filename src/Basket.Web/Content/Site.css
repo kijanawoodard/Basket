@@ -24,7 +24,32 @@ textarea {
     max-width: 280px;
 }
 
-header.catalog { margin-top: 1em;}
+input { width: 400px;font-size: 1.4em;}
+input[type="email"], input[type="month"], input[type="password"], input[type="tel"], input[type="text"], input[type="time"], input[type="url"], input[type="week"], input[type="number"], input[type="search"], input[type="date"], input[type="datetime"], input[type="datetime-local"], select {
+	background: #fff;
+	border: 1px solid rgba(0,0,0,.12);
+	border-radius: 4px;
+	color: rgba(0,0,0,.8);
+	display: inline-block;
+	padding: 4px;
+	vertical-align: middle;
+}
+button, input[type="reset"], input[type="submit"] {
+	background: #2196f3;
+	border: 1px solid rgba(0,0,0,.12);
+	border-radius: 4px;
+	color: #fff;
+	cursor: pointer;
+	display: inline-block;
+	margin: 0;
+	padding: 8px 16px;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+    height: 38px;
+}
+
+header.catalog { margin-top: 1em;display: flex;justify-content: space-between}
 .catalog { display: flex;}
 .catalog #categories {
     text-transform: uppercase;

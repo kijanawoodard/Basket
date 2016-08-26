@@ -16,7 +16,7 @@ namespace Basket.Web.Controllers
 
         public ActionResult Index()
         {
-            return RedirectToAction("Get", "Product", new { category = "Specials" });
+            return RedirectToAction("Index", "ProductsByCategory", new { category = "Specials" });
         }
 
         public ActionResult About()
