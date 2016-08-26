@@ -18,6 +18,11 @@ namespace Basket.Web.Controllers
         [HttpGet]
         public ActionResult Index(string q)
         {
+            if (string.IsNullOrWhiteSpace(q))
+            {
+                q = "baskets";
+            }
+
             var products = _session.Query<ProductSearchIndex.Query, ProductSearchIndex>()
                 .Search(x => x.Search, q)
                 .ProjectFromIndexFieldsInto<ProductSearchIndex.Result>()
