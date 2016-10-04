@@ -13,6 +13,10 @@
 <a href="sms:&body=join my geo party!!!">Tap to party!</a>
 
 <hr/>
+<h3>Geo Location</h3>
+<label id="geo"></label>
+
+<hr/>
 <h3>Live Video</h3>
 <video autoplay></video><br/>
 
@@ -31,6 +35,33 @@
 
 <hr/>
 <div contenteditable='true'>Paste area</div>
+<script>
+    if (navigator.geolocation) {
+        var timeoutVal = 10 * 1000 * 1000;
+        navigator.geolocation.watchPosition(
+          displayPosition,
+          displayError,
+          { enableHighAccuracy: false, timeout: timeoutVal, maximumAge: 0 }
+        );
+    }
+    else {
+        alert("Geolocation is not supported by this browser");
+    }
+
+    var which = 1;
+    function displayPosition(position) {
+        document.getElementById('geo').innerText = which++ + ". Latitude: " + position.coords.latitude + ", Longitude: " + position.coords.longitude;
+    }
+
+    function displayError(error) {
+        var errors = {
+            1: 'Permission denied',
+            2: 'Position unavailable',
+            3: 'Request timeout'
+        };
+        document.getElementById('geo').innerText = "Error: " + errors[error.code];
+    }
+</script>
 <script>
     function handlePaste(e) {
         var clipboardData, pastedData;
