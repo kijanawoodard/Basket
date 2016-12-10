@@ -63,21 +63,6 @@
     }
 </script>
 <script>
-    function handlePaste(e) {
-        var clipboardData, pastedData;
-        console.log(1234)
-        // Stop data actually being pasted into div
-        e.stopPropagation();
-        e.preventDefault();
-
-        // Get pasted data via clipboard API
-        clipboardData = e.clipboardData || window.clipboardData;
-        pastedData = clipboardData.getData('Text');
-
-        // Do whatever with pasteddata
-        //alert(pastedData);
-        document.getElementById('editableDiv').innerText = pastedData;
-    }
 
     var data = [];
     var last = {};
@@ -159,7 +144,6 @@
         document.querySelector('video').click();
     }
 
-    document.body.addEventListener('paste', handlePaste);
     document.body.addEventListener('keydown', handleKeydown);
 </script>
 <script>
